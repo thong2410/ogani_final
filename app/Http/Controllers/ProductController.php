@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -31,6 +32,7 @@ class ProductController extends Controller
 
     public function addToCart(Request $request){
         $id = $request->pid;
+        $today= Carbon::now('Asia/Ho_Chi_Minh');
         $quantity = (int)$request->quantity;
         if($quantity < 1) $quantity = 1;
 
@@ -62,6 +64,9 @@ class ProductController extends Controller
             $cart[$id]['quantity'] = $cart[$id]['quantity'] + $quantity;
             session()->put('cart', $cart);
             return response()->json(array('status' => 'success', 'msg' => trans('main.cart.add_success'), 'count' => count((array)session('cart'))));
+        }
+        if ($product->hsd<$today){
+            return response()->json(array('status' => 'error', 'msg' => trans('main.cart.hsd', ['name' => $product->hsd])));
         }
         // neu khong co thi add , default quantity = 1
         $cart[$id] = [

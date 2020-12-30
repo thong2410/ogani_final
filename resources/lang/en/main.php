@@ -144,6 +144,7 @@ return [
         'shipping' => 'Shipping',
         'free_shipping' => 'Free Shipping',
         'total_price' => 'Total Price',
+        'hsd' => 'This product has expired on',
         'proceed_to_checkout' => 'Proceed to check out'
     ],
     'checkout' => [

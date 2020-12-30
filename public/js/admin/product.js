@@ -7,6 +7,7 @@ $(".addProduct").click(function(e) {
     var prod_name = $("input[name='prod_name']").val();
     var unit_price = $("input[name='unit_price']").val();
     var sale = $("input[name='sale']").val();
+    var hsd=$("input[name='hsd']").val();
     var cate_id = $("select[name='cate_id'] option:selected").val();
     var status = $("select[name='status'] option:selected").val();
     var mediaId = $("input[id='mediaId']").val();
@@ -34,7 +35,7 @@ $(".addProduct").click(function(e) {
     $.ajax({
         url: "/admin/product",
         type: 'POST',
-        data: { _token: _token, unit: unit, prod_name: prod_name, unit_price: unit_price, status: status, quantity: quantity, detail: detail, sale: sale, cate_id: cate_id, content: content, detail: detail, seo_title: seo_title, seo_description: seo_description, seo_keywords: seo_keywords, thumb_id: mediaId },
+        data: { _token: _token, unit: unit, hsd: hsd, prod_name: prod_name, unit_price: unit_price, status: status, quantity: quantity, detail: detail, sale: sale, cate_id: cate_id, content: content, detail: detail, seo_title: seo_title, seo_description: seo_description, seo_keywords: seo_keywords, thumb_id: mediaId },
         success: function(data) {
             if ($.isEmptyObject(data.error)) {
                 swal({
@@ -61,6 +62,7 @@ $(".editProduct").click(function(e) {
     var prod_name = $("input[name='prod_name']").val();
     var unit_price = $("input[name='unit_price']").val();
     var sale = $("input[name='sale']").val();
+    var hsd=$("input[name='hsd']").val();
     var cate_id = $("select[name='cate_id'] option:selected").val();
     var status = $("select[name='status'] option:selected").val();
     var mediaId = $("input[id='mediaId']").val();
@@ -85,7 +87,7 @@ $(".editProduct").click(function(e) {
     $.ajax({
         url: "/admin/product/" + pid,
         type: 'POST',
-        data: { _token: _token, _method: _method, unit: unit, prod_name: prod_name, unit_price: unit_price, status: status, quantity: quantity, detail: detail, sale: sale, cate_id: cate_id, content: content, detail: detail, seo_title: seo_title, seo_description: seo_description, seo_keywords: seo_keywords, thumb_id: mediaId },
+        data: { _token: _token, _method: _method, unit: unit, hsd: hsd, prod_name: prod_name, unit_price: unit_price, status: status, quantity: quantity, detail: detail, sale: sale, cate_id: cate_id, content: content, detail: detail, seo_title: seo_title, seo_description: seo_description, seo_keywords: seo_keywords, thumb_id: mediaId },
         success: function(data) {
             if ($.isEmptyObject(data.error)) {
                 swal({

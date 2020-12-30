@@ -35,6 +35,7 @@
                 <th scope="col">@lang('admin.product.sale')</th>
                 <th scope="col">@lang('admin.product.quantity')</th>
                 <th scope="col">@lang('admin.product.status')</th>
+                <th scope="col">@lang('admin.product.endday')</th>
                 <th></th>
             </tr>
         </thead>
@@ -48,8 +49,9 @@
                     <td>{{ $prod->unit }}</td>
                     <td>{{ number_format($prod->unit_price) }}₫</td>
                     <td>{{ $prod->sale }}%</td>
-                    <td>{{ number_format($prod->quantity) }}</td>
+                    <td>{{ number_format($prod->quantity) }}</td>               
                     <td><span class="badge @if($prod->status == 'feature') badge-success @else badge-info @endif">{{ trans('admin.product.'.$prod->status) }}</span></td>
+                    <td>{{ $prod->hsd }}</td>
                     <td>
                         <form action="{{ route('admin.product.destroy', $prod->product_id) }}" method="POST"
                             class="form-inline">

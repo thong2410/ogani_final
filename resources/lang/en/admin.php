@@ -23,6 +23,7 @@ return [
         'name' => 'Product Name',
         'unit_price' => 'Unit price',
         'sale' => 'Sale',
+        'endday' => 'expiry date',     
         'category' => 'Category',
         'detail' => 'Detail',
         'seo' => 'SEO',

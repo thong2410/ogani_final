@@ -143,6 +143,7 @@ return [
         'shipping' => 'Phí giao hàng',
         'free_shipping' => 'Miễn phí',
         'total_price' => 'Tổng',
+        'hsd' => 'Sản phẩm này đã hết hạn vào ngày :name',
         'proceed_to_checkout' => 'Tiến hành thanh toán',
     ],
     'checkout' => [

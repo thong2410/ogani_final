@@ -45,6 +45,9 @@ class ProductController extends Controller
         if($product->quantity < 1 || $product->quantity < $quantity) {
             return response()->json(array('status' => 'error', 'msg' => trans('main.cart.not_enough_quantity', ['name' => $product->prod_name]), 'count' => count((array)session('cart'))));
         }
+        if ($product->hsd<$today){
+            return response()->json(array('status' => 'error', 'msg' => trans('main.cart.hsd', ['name' => $product->hsd])));
+        }
         // neu chua co
         if(!$cart) {
             $cart = [
@@ -65,9 +68,7 @@ class ProductController extends Controller
             session()->put('cart', $cart);
             return response()->json(array('status' => 'success', 'msg' => trans('main.cart.add_success'), 'count' => count((array)session('cart'))));
         }
-        if ($product->hsd<$today){
-            return response()->json(array('status' => 'error', 'msg' => trans('main.cart.hsd', ['name' => $product->hsd])));
-        }
+        
         // neu khong co thi add , default quantity = 1
         $cart[$id] = [
             "name" => $product->prod_name,

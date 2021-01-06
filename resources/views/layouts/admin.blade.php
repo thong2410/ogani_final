@@ -106,6 +106,21 @@
                                     <span class="st-menu__text">@lang('admin.order.orders')</span>
                                 </a>
                             </li>
+                            <li class="st-menu__item">
+                                <a href="javascript:void" class="st-menu__link st-menu__toggle">
+                                    <i class="st-menu__icon fad fa-list"></i>
+                                    <span class="st-menu__text">@lang('admin.coupon.coupon')</span>
+                                    <i class="st-menu__caret fad fa-chevron-down"></i>
+                                </a>
+                                <div class="st-menu__submenu">
+                                    <a href="{{ route('admin.coupon.index') }}" class="st-menu__link">
+                                        <span class="st-menu__text">@lang('admin.coupon.categories')</span>
+                                    </a>
+                                    <a href="{{ route('admin.coupon.create') }}" class="st-menu__link">
+                                        <span class="st-menu__text">@lang('admin.coupon.create')</span>
+                                    </a>
+                                </div>
+                            </li>
                             @endif
                             @if(Auth::user()->role('admin') || Auth::user()->role('superadmin') || Auth::user()->role('editor'))
                             <li class="st-menu__item">
@@ -235,6 +250,7 @@
     <script src="{{ asset('js/admin/apexcharts.min.js') }}"></script>
     <script src="{{ asset('js/admin/charts.js?id='.time()) }}"></script>
     <script src="{{ asset('js/admin/product.js') }}"></script>
+    <script src="{{ asset('js/admin/coupon.js') }}"></script>
     <script src="{{ asset('js/admin/file-upload.js') }}"></script>
     <div class="modal fade" id="LoadModal" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
@@ -257,6 +273,23 @@
         CKEDITOR.replace( 'content' );
         });
     </script>
+    
+<script type="text/javascript">
+    $("#parent").change(function(){
+        var coupon_value = $(this).val();
+        if(coupon_value == 'money'){
+            $('#money').show();
+            $('#percent').hide();
+            $('#percent').empty();
+            $('#money').html("<label for='coupon_value'>@lang('admin.coupon.coupon_value')</label><div class='input-group mb-3'><span class='input-group-text'>VNĐ</span><input type='number' class='form-control' id='coupon_value' name='coupon_value' min='1000' aria-label='Amount (to the nearest dollar)' placeholder='@lang('admin.coupon.placeholder.money')'' required=''><span class='input-group-text'>.00</span></div>");
+        }else if(coupon_value == 'percent'){
+            $('#percent').show();
+            $('#money').hide();
+            $('#money').empty();
+            $('#percent').html("<label for='coupon_value'>@lang('admin.coupon.coupon_value')</label><div class='input-group mb-3'><span class='input-group-text'>Percent</span><input type='number' class='form-control' id='coupon_value' name='coupon_value' min='0' aria-label='Amount (to the nearest dollar)' placeholder='@lang('admin.coupon.placeholder.percent')' max='100' required=''><span class='input-group-text'>%</span></div>");
+        }
+    });
+</script>
 </body>
 
 </html>

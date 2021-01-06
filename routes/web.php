@@ -48,6 +48,7 @@ Route::name('admin.')
         Route::resource('order', 'Admin\OrderController')->middleware('can:isAdmin,isSuperAdmin');
         Route::resource('rating', 'Admin\RatingController')->middleware('can:isAdmin,isSuperAdmin');
         Route::resource('contact', 'Admin\ContactController')->middleware('can:isAdmin,isSuperAdmin');
+        Route::resource('coupon', 'Admin\CouponController')->middleware('can:isAdmin,isSuperAdmin');
         Route::get('contact/del/{id?}', 'Admin\ContactController@delcontact');
         Route::post('media/upload/product', 'MediaController@uploadProduct')->name('media.upload');
         Route::get('media/list', 'MediaController@index')->name('media.list');
@@ -55,6 +56,12 @@ Route::name('admin.')
         Route::get('user/order/{user}', 'Admin\OrderController@viewUserOrder')->where('user', '[0-9]+')->middleware('can:isAdmin,isSuperAdmin')->name('order.user-order');
         Route::get('chart/order_status', 'Admin\ChartController@orderStatus')->name('chart.status');
         Route::get('chart/order_by_month', 'Admin\ChartController@orderByMonth')->name('chart.status');
+        Route::get('couponDetai/show/{id}', 'Admin\CouponDetailController@show')->name('CouponDetail.show')->middleware('can:isAdmin,isSuperAdmin');
+        Route::get('coupondetail/destroy/{id}', 'Admin\CouponDetailController@destroy')->middleware('can:isAdmin,isSuperAdmin');
+        Route::get('coupondetail/add/{id}', 'Admin\CouponDetailController@add_coupon')->name('CouponDetail.getadd')->middleware('can:isAdmin,isSuperAdmin');
+        Route::post('coupondetail/add', 'Admin\CouponDetailController@add')->name('CouponDetail.add')->middleware('can:isAdmin,isSuperAdmin');
+        Route::get('coupondetail/del_used/{coupon_id}', 'Admin\CouponDetailController@del_used')->middleware('can:isAdmin,isSuperAdmin');
+
 
 });
 
@@ -84,3 +91,4 @@ Route::post('cart/update', 'ProductController@updateCart')->name('cart.update.it
 Route::post('getDistricts', 'AddressController@getDistricts');
 Route::post('getWards', 'AddressController@getWards');
 Route::post('getWardsInDistrict', 'AddressController@getWardsInDistrict');
+Route::post('cart/coupon', 'UserController@coupon')->name('checkCoupon');

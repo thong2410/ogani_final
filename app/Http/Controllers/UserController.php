@@ -8,6 +8,9 @@ use App\User;
 use App\Address;
 use App\Order;
 use App\OrderDetail;
+use App\Coupon;
+use App\CouponDetail;
+use Carbon\Carbon;
 use Auth;
 use Validator;
 use App\Http\Requests\ChangePassword;
@@ -61,8 +64,43 @@ class UserController extends Controller
         return view('user.wishlist', $this->data);
     }
 
+    public function coupon(Request $request){
+        $check = CouponDetail::where('code', $request->code)->first();
+        $coupon = session()->has('checkCoupon') ? session()->get('checkCoupon') : array();
+        $coupon[$check->id] = $check->coupon()->first();
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        
+        if(!$check) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.notFoundCoupon')));
+        if($check->status == 'used') return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponUsed')));
+        if($today > $coupon[$check->id]->end_date) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponExpired')));
+
+        session()->put('checkCoupon', $coupon);
+        return response()->json(array('status' => 'success', 'msg' => trans('main.coupon.checkSuccess')));
+    }
+
     public function cart(Request $request){
         $this->data['list'] = (array)session()->get('cart');
+
+        $total_price = 0;
+        foreach ($this->data['list'] as $key => $value) {
+            $total_price = $total_price + ($value['price'] * $value['quantity']);
+        }
+        $total_price_copy = $total_price;
+
+        if(session()->has('checkCoupon')){
+            $data = session()->get('checkCoupon');
+            foreach ($data as $key => $coupon) {
+                if ($coupon->type == 'money') {
+                    $total_price = $total_price - $coupon->coupon_value;
+                }else{
+                    $total_price = $total_price - $total_price_copy * ($coupon->coupon_value/100);
+                }
+            }
+            if($total_price < 0) $total_price = 0;
+        }
+
+        $this->data['total_price'] = $total_price;
+        session()->put('total_price', $total_price);
 
         return view('user.cart', $this->data);
     }
@@ -71,13 +109,15 @@ class UserController extends Controller
         $this->data['list'] = (array)session()->get('cart');
         $this->data['cities'] = Province::orderBy('type')->get();
         $this->data['address'] = Auth::user()->address()->get();
+        $this->data['total_price'] = session()->get('total_price');
+        
         if(count((array)session()->get('cart')) < 1) abort(404);
 
         return view('user.checkout', $this->data);       
     }
 
     public function placeOrder(Request $request) {
-    	$validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'fullName' => 'required|string|max:30',
             'phoneNumber' => 'required|string|max:10',
             'email' => 'required|string|email|max:255',
@@ -105,6 +145,18 @@ class UserController extends Controller
             $user_id = Auth::id();
             $note = !empty($request->note) ? $request->note : '---';
 
+            $total_price = session()->get('total_price');
+            $getCouponList = session()->get('checkCoupon');
+            $couponList = "";
+            foreach ($getCouponList as $key => $value) {
+                CouponDetail::where('id', $key)->update([
+                    'status' => 'used',
+                    'username' => Auth::user()->username,
+                ]);
+
+                $couponList .= $value->coupon_value.",";
+            }
+ 
             Order::create([
                 'user_id' => $user_id, 
                 'full_name' => $request->fullName, 
@@ -114,7 +166,9 @@ class UserController extends Controller
                 'order_address2' => $request->address, 
                 'order_Note' => $note, 
                 'order_status' => 'processing',
-                'order_type' => 'cod'
+                'order_type' => 'cod',
+                'total_price' => $total_price,
+                'coupon' => $couponList,
             ]);
 
             $lastOrderId = Order::latest()->first()->order_id;
@@ -125,7 +179,9 @@ class UserController extends Controller
                 'phone_number' => $request->phoneNumber,
                 'order_email' => $request->email,   
                 'order_Note' => $note, 
-                'cart'=> session()->get('cart')
+                'cart'=> session()->get('cart'),
+                'total_price' => $total_price,
+                'couponList' => $couponList
               
             ];
 
@@ -155,6 +211,7 @@ class UserController extends Controller
               
             }
             
+            session()->forget('checkCoupon');
             
             return response()->json(['success'=> trans('main.checkout.place_order_success'), 'url' => route('user.cart.order-completed')]);
         }

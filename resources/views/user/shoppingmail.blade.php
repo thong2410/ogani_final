@@ -61,8 +61,20 @@ th{border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left}
         <td class="td1">@lang('main.mail.cod')</td>
 </tr>
 <tr>
-<th scope="row" colspan="3" >@lang('main.mail.total'):</th>
-<td class="td2"><span>{{ number_format($total) }}<span>₫</span></span></td>
+<th scope="row" colspan="2" >@lang('main.mail.total'):</th>
+<td class="td2">(- @lang('admin.coupon.coupon')) <br>
+  @php
+      $coupons = explode(',',$couponList);
+      foreach($coupons as $coupon){
+          if($coupon < 100 && $coupon > 0 ){
+              echo $coupon.'% <br>';
+          }elseif($coupon != null){
+             echo $coupon.'VNĐ <br>';
+          }  
+      }
+  @endphp
+</td>
+<td class="td2"><span>{{ number_format($total_price) }}<span>₫</span></span></td>
 </tr>
 </tfoot>
 </table>

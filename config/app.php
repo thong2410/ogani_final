@@ -21,7 +21,7 @@ return [
     'superAdmin_role' => 'superadmin',
     'paginate' => 15,
     'paginate_shop' => 12,
-    'email_admin' => 'hauntpd02931@fpt.edu.vn',
+    'email_admin' => 'nguyenvietthong2410@gmail.com',
     'infomation' => [
         'address_vi' => '137 Đường Nguyễn Thị Thập, Liên Chiểu, Thành phố Đà Nẵng',
         'address_en' => '137 Nguyễn Thị Thập Street, Liên Chiểu, Đà Nẵng City',

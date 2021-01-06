@@ -24,6 +24,8 @@ class CreateTableOrderAndOrderDetails extends Migration
             $table->string('order_Note',125)->nullable();           
             $table->enum('order_status', ['processing', 'shipping', 'delivered','cancelled'])->default('processing');
             $table->enum('order_type', ['cod', 'banking'])->default('cod');
+            $table->integer('total_price');
+            $table->string('coupon')->nullable();
 
             $table->foreign('user_id')->references('user_id')->on('users');
         });

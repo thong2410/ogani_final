@@ -42,7 +42,7 @@
     </tr>
     <tr>
       <th colspan="3">@lang('admin.order.total')</th>
-      <td>{{ number_format($total) }}₫</td>
+      <td>{{ number_format($order->total_price) }}₫</td>
     </tr>
   </tbody>
 </table>

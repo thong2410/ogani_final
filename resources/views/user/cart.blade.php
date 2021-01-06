@@ -72,9 +72,6 @@
                   </thead>
                   <tbody>
                     @if(isset($list) && count($list) > 0)
-                    @php
-                        $total = 0;
-                    @endphp
                     @foreach($list as $index => $item)
                     <tr>
                       <td class="product-iamge"> 
@@ -91,9 +88,6 @@
                       <button class="cart-remove-item no-round-btn" data-id="{{ $index }}" type="button"><i class="fas fa-times"></i></button>
                       </td>
                     </tr>
-                    @php
-                        $total = $total + ($item['price'] * $item['quantity']);
-                    @endphp
                     @endforeach
                     @else
                     <tr class="text-center">
@@ -111,6 +105,28 @@
         </form>
           @if(isset($list) && count($list) > 0)
           <div class="row justify-content-end">
+            <div class="col-12 col-md-6 col-lg-8">
+              <div class="cart-total_block">
+                <h2>@lang('admin.coupon.coupon')</h2>
+                <table class="table">
+                  <colgroup>
+                    <col span="1" style="width: 80%">
+                    <col span="1" style="width: 20%">
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <form action="" method="">
+                        {{ csrf_field() }}
+                        <td><input type="text" id="code" class="form-control" name="code" placeholder="@lang('main.cart.placeholder_coupon')"></td>
+                        <td><button class="btn btn-danger" id="checkcoupon">Submit</button></td>
+                      </form>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
             <div class="col-12 col-md-6 col-lg-4">
               <div class="cart-total_block">
                 <h2>@lang('main.cart.cart_total')</h2>
@@ -122,7 +138,8 @@
                   <tbody>
                     <tr class="d-none">
                       <th>SUBTOTAL</th>
-                      <td>{{ number_format($total) }}₫</td>
+                      <td>  
+                      </td>
                     </tr>
                     <tr>
                       <th>@lang('main.cart.shipping')</th>
@@ -132,7 +149,9 @@
                     </tr>
                     <tr>
                       <th>@lang('main.cart.total_price')</th>
-                      <td>{{ number_format($total) }}₫</td>
+                      <td>
+                            {{ number_format($total_price) }} ₫
+                        </td>
                     </tr>
                   </tbody>
                 </table>

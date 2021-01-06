@@ -475,3 +475,77 @@ $("#close-search").click(function() {
     $('#show-prod-search').hide();
     console.log('ok');
 });
+
+$('.submitContact').submit(function(e) {
+    e.preventDefault();
+    var fullname = $("input[name='fullname']").val();
+    var email = $("input[name='email']").val();
+    var messages = $('textarea#messages').val();
+
+    $('.leave-message').addClass('input_loading');
+    $('.print-error-msg').hide();
+    $.ajax({
+        type: 'POST',
+        url: '/contact',
+        dataType: 'json',
+        data: { fullname, fullname, messages: messages, email: email },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(data) {
+            if (data.status == 'success') {
+                swal({
+                    text: data.msg,
+                    icon: data.status,
+                });
+            } else {
+                printErrorMsg(data.error);
+            }
+            $('.leave-message').removeClass('input_loading');
+
+        }
+    });
+});
+
+
+$('.submitSubscribe').submit(function(e) {
+    e.preventDefault();
+    var email_subscribe = $("input[name='email_subscribe']").val();
+
+    $('.newletter_input').addClass('input_loading');
+    $.ajax({
+        type: 'POST',
+        url: '/subscribe',
+        dataType: 'json',
+        data: { email: email_subscribe },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(data) {
+            swal({
+                text: data.msg,
+                icon: data.status,
+            });
+            $('.newletter_input').removeClass('input_loading');
+        }
+    });
+});
+
+$("#checkcoupon").click(function(e){
+    e.preventDefault();
+    var code = $('#code').val();
+    $.ajax({
+        type: 'POST',
+        url: 'cart/coupon',
+        dataType: 'json',
+        data: {
+            'code': code
+        },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(data){
+            swal({
+                text: data.msg,
+                icon: data.status,
+            }).then((result) => {
+                // Reload the Page
+                location.reload();
+            });
+        }
+    });
+}); 

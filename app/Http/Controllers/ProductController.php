@@ -111,6 +111,11 @@ class ProductController extends Controller
                 unset($cart[$request->cart_id]);
                 session()->put('cart', $cart);
             }
+
+            if(count($cart) == 0){
+                session()->forget('checkCoupon');
+            }
+            
             return response()->json(array('status' => 'success', 'msg' => trans('main.cart.remove_success'), 'count' => count((array)session()->get('cart'))));
         }
     }

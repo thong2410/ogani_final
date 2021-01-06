@@ -43,6 +43,7 @@
                 <th scope="col">@lang('admin.order.email')</th>
                 <th scope="col">@lang('admin.order.status')</th>
                 <th scope="col">@lang('admin.order.date')</th>
+                <th scope="col">@lang('admin.coupon.coupon')</th>
                 <th></th>
             </tr>
         </thead>
@@ -57,6 +58,18 @@
                 <td>{{ $order->order_email }}</td>
                 <td>{!! trans('admin.order.status_label.'.$order->order_status) !!}</td>
                 <td><span class="badge">{{ $order->created_at }}</span></td>
+                <td>
+                    @php
+                        $coupons = explode(',',$order->coupon);
+                        foreach($coupons as $coupon){
+                            if($coupon < 100 && $coupon > 0 ){
+                                echo $coupon.'% <br>';
+                            }elseif($coupon != null){
+                               echo $coupon.'VNĐ <br>';
+                            }  
+                        }
+                    @endphp
+                </td>
                 <td>
                         <form action="{{ route('admin.order.destroy', $order->order_id) }}" method="POST"
                             class="form-inline">

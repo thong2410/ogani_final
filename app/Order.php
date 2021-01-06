@@ -20,7 +20,9 @@ class Order extends Model
         'order_address2',
         'order_Note',
         'order_status',
-        'order_type'
+        'order_type',
+        'total_price',
+        'coupon',
     ]; 
 
     public function user()

@@ -127,6 +127,7 @@ return [
         'remove_success' => 'Product deleted from the cart',
         'update_success' => 'Update cart successfully',
         'product_does_not_exist' => 'Product does not exist',
+        'placeholder_coupon' => 'Your coupon',
         'login_msg' => 'Please login before using',
         'list' => 'Cart',
         'image' => 'Picture',
@@ -144,8 +145,10 @@ return [
         'shipping' => 'Shipping',
         'free_shipping' => 'Free Shipping',
         'total_price' => 'Total Price',
+        'proceed_to_checkout' => 'Proceed to check out',
+        'write_coupon' => 'Enter a discount code',
         'hsd' => 'This product has expired on',
-        'proceed_to_checkout' => 'Proceed to check out'
+        'proceed_to_checkout' => 'Proceed to check out',
     ],
     'checkout' => [
         'paymethod' => [
@@ -277,6 +280,12 @@ return [
         'now' => 'Just now',
         'comment_success' => 'Comment success'
 
-    ]
+    ],
+    'coupon' => [
+        'checkSuccess' => 'Check successful coupon code',
+        'notFoundCoupon' => 'Cannot find discount code above',
+        'couponUsed' => 'This coupon is already in use',
+        'couponExpired' => 'This coupon has expired',
+    ],
 ];
 ?>

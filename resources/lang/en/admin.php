@@ -226,5 +226,35 @@ return [
             'delivered' => '<div class="st-timeline__point border-success text-success"> <i class="fad fa-check-double"></i> </div>',
             'cancelled' => '<div class="st-timeline__point st-timeline__point--solid bg-danger"> <i class="fad fa-window-close"></i> </div>'
         ],
+    ], 'coupon' => [
+        'coupon' => 'Coupon',
+        'create' => 'Create new coupon',
+        'categories' => 'Coupons',
+        'coupon_value' => 'Coupon value',
+        'coupon_event' => 'Coupon event',
+        'coupon_type' => 'Coupon type',
+        'coupon_code' => 'Coupon code',
+        'coupon_status' => 'Status',
+        'username' => 'Username',
+        'quantity' => 'Quantity',
+        'start_date' => 'Start date',
+        'end_date' => 'End date',
+        'search_placeholder' => 'Coupon event',
+        'type' => [
+            'money' => 'Coupon money',
+            'percent' => 'Coupon percent'
+        ],
+        'not_found' => 'Not found',
+        'create_success' => 'Has successfully added a new coupon code',
+        'coupondetail' => 'Coupon detail',
+        'delete_coupon' => 'Delete used code',
+        'del_danger' => 'Do not delete coupon',
+        'search_placeholder' => 'Coupon code want find',
+        'add' => 'Add new coupon',
+        'placeholder' => [
+            'money' => 'Enter the money value of discount code',
+            'percent' => 'enter the percentage value of discount code'
+        ],
+        'errorDate' => 'Invalid start date and end date',
     ]
 ];

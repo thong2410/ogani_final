@@ -127,6 +127,7 @@ return [
         'update_success' => 'Cập nhật giỏ hàng thành công',
         'product_does_not_exist' => 'Sản phẩm không tồn tại',
         'login_msg' => 'Vui lòng đăng nhập trước khi sử dụng',
+        'placeholder_coupon' => 'Nhập mã giảm giá của bạn',
         'list' => 'Giỏ hàng',
         'image' => 'Hình ảnh',
         'product_name' => 'Tên sản phẩm',
@@ -145,6 +146,7 @@ return [
         'total_price' => 'Tổng',
         'hsd' => 'Sản phẩm này đã hết hạn vào ngày :name',
         'proceed_to_checkout' => 'Tiến hành thanh toán',
+        'write_coupon' => 'Điền mã giảm giá',
     ],
     'checkout' => [
         'paymethod' => [
@@ -276,7 +278,13 @@ return [
         'now' => 'Vừa xong',
         'comment_success' => 'Bình luận thành công'
 
-    ]
+    ],
+    'coupon' => [
+        'checkSuccess' => 'Kiểm tra mã giảm giá thành công',
+        'notFoundCoupon' => 'Không tìm được mã giảm giá như trên',
+        'couponUsed' => 'Mã giảm giá này đã được sử dụng',
+        'couponExpired' => 'Mã giảm giá này đã hết hạn',
+    ],
 
 ];
 ?>

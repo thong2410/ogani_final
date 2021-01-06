@@ -144,7 +144,7 @@
                         </tr>
                         <tr>
                           <th>@lang('main.cart.total_price')</th>
-                          <td class="total">{{ number_format($total) }}₫</td>
+                          <td class="total">{{ number_format($total_price) }}₫</td>
                         </tr>
                       </tbody>
                     </table>

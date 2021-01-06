@@ -236,5 +236,40 @@ return [
             'delivered' => '<div class="st-timeline__point border-success text-success"> <i class="fad fa-check-double"></i> </div>',
             'cancelled' => '<div class="st-timeline__point st-timeline__point--solid bg-danger"> <i class="fad fa-window-close"></i> </div>'
         ],
+    ],'coupon'=>[
+        'coupon'=>'Mã giảm giá',
+        'create'=>'Tạo mã giảm giá',
+        'categories'=>'Danh sách',
+        'coupon_value' => 'Giá trị',
+        'coupon_event'=>'Sự kiện giảm giá',
+        'coupon_type'=>'Thể loại giảm giá',
+        'coupon_code' => 'Mã giảm giá',
+        'coupon_status' => 'Trạng thái',
+        'username' => 'Tên người dùng',
+        'quantity'=>'Số lượng',
+        'start_date'=>'Ngày bắt đầu',
+        'end_date'=>'Ngày kết thúc',
+        'search_placeholder' => 'Tên sự kiện giảm giá',
+        'type' => [
+            'money' => 'Giảm tiền',
+            'percent' => 'Giảm phần trăm'
+        ],
+        'not_found' => 'Không tìm thấy mã khuyến mãi nào',
+        'create_success' => 'Thêm mới mã giảm giá thành công',
+        'coupondetail' => 'Chi tiết mã giảm giá',
+        'status' => [
+            'new' => 'Mới',
+            'used' => 'Đã dùng',
+            'expired' => 'Hết hạn'
+        ],
+        'delete_coupon' => 'Xóa mã đã dùng',
+        'del_danger' => 'Xóa mã giảm giá thất bại',
+        'search_placeholder' => 'Mã giảm giá cần tìm',
+        'add' => 'Thêm mã giảm giá',
+        'placeholder' => [
+            'money' => 'Nhập giá trị tiền của mã giảm giá',
+            'percent' => 'nhập giá trị phần trăm của mã giảm giá'
+        ],
+        'errorDate' => 'Ngày bắt đầu và ngày kết thúc không hợp lệ',
     ]
 ];

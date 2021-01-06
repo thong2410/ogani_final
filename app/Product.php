@@ -21,6 +21,7 @@ class Product extends Model
         'unit_price',
         'unit',
         'sale',
+        'hsd',
         'quantity',
         'status',
         'content',

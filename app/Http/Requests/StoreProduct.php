@@ -27,6 +27,7 @@ class StoreProduct extends FormRequest
             'name' => 'required|string',
             'parent_id' => 'sometimes|nullable|numeric',
             'description' => 'nullable|string',
+          
         ];
     }
 

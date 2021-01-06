@@ -23,13 +23,14 @@ class CreateProductsTable extends Migration
             $table->integer('quantity')->unsigned();
             $table->enum('status', ['normal', 'feature'])->default('normal');
             $table->string('unit', 100);
+            $table->date('hsd');
             $table->text('content');
             $table->json('detail');
             $table->string('seo_title', 150);
             $table->mediumText('seo_description');
             $table->mediumText('seo_keywords');
             $table->timestamps();
-
+           
             $table->foreign('cate_id')->references('cate_id')->on('categories');
             $table->foreign('thumb_id')->references('id')->on('media');
         });

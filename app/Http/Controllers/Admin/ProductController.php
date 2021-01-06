@@ -57,13 +57,14 @@ class ProductController extends Controller
             'unit_price' => 'required|numeric',
             'sale' => 'required|numeric|min:0|max:100',
             'cate_id' => 'required|numeric',
-            'status' => 'required|string',
+            'status' => 'required|string',   
             'content' => 'required|string',
             'detail' => 'required|string',
             'seo_title' => 'required|string',
             'seo_description' => 'required|string',
             'seo_keywords' => 'required|string',
             'thumb_id' => 'required|numeric',
+            'hsd' => 'required|date',
         ]);
 
 
@@ -113,6 +114,7 @@ class ProductController extends Controller
             'seo_description' => 'required|string',
             'seo_keywords' => 'required|string',
             'thumb_id' => 'required|numeric',
+            // 'hsd' => 'required|date|after_or_equal:tomorrow',
         ]);
 
 

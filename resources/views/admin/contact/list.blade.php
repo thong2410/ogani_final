@@ -31,7 +31,7 @@
                 <td>{{ $dbs->id }}</td>
                 <td><b>{{ $dbs->name }}</b></td>
                 <td>{{ $dbs->email }}</td>     
-                <td>{{str_limit ($dbs->note,50)}}</td>      
+                <td>{{$dbs->note}}</td>      
                 <td><a class="btn btn-sm btn-outline-danger mr-1 mb-1" href="contact/del/{{ $dbs->id }}"><i class="fa fa-trash" ></i></a></td> 
                 </tr>
                 @endforeach

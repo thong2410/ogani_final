@@ -41,7 +41,8 @@
                         <div class="col-12 col-lg-6">
                             <div class="shop-detail_info">
                                 <h5 class="product-type color-type pink">{{ $prod->category->name }}</h5>
-                                <h2 class="product-name">{{ $prod->prod_name }}</h2>
+                                <h2 class="product-name">{{ $prod->prod_name }}</h2><br>
+                                <p class="product-more">HSD đến ngày {{ $prod->hsd }}</p>
                                 <p class="product-describe">{{ str_limit(strip_tags($prod->content), 120) }}</p><a class="product-more" href="javascript:void(0)" onclick="$('#ui-id-1').trigger('click');autoScrollTo('prod-desc');">@lang('main.product.view_more') <i class="arrow_carrot-2right"></i></a>
                                 <div class="price-rate">
                                     <h3 class="product-price">

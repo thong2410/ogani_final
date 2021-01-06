@@ -75,6 +75,12 @@
                 <input type="text" class="form-control fix-rounded-right" id="unit" name="unit" placeholder="Kg" value="{{ $product->unit }}" required>
             </div>
         </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="hsd">@lang('admin.product.endday')</label>
+                <input type="date" class="form-control fix-rounded-right" id="hsd" name="hsd" placeholder="Kg" value="{{ $product->hsd}}" required>
+            </div>
+        </div>
     </div>
     <hr class="mb-4"/>
     <ul class="nav nav-tabs" id="myTab" role="tablist">

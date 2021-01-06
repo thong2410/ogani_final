@@ -26,6 +26,7 @@ return [
         'name' => 'Tên',
         'unit_price' => 'Đơn giá',
         'sale' => 'Giảm giá',
+        'endday' => 'Hạn sử dụng',
         'category' => 'Danh mục',
         'detail' => 'Chi tiết',
         'seo' => 'SEO',

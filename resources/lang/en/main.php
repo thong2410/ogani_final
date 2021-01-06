@@ -146,7 +146,9 @@ return [
         'free_shipping' => 'Free Shipping',
         'total_price' => 'Total Price',
         'proceed_to_checkout' => 'Proceed to check out',
-        'write_coupon' => 'Enter a discount code'
+        'write_coupon' => 'Enter a discount code',
+        'hsd' => 'This product has expired on',
+        'proceed_to_checkout' => 'Proceed to check out'
     ],
     'checkout' => [
         'paymethod' => [

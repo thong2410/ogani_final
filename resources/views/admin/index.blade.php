@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.admin')
 
 @section('title', trans('main.dashboard'))
@@ -26,7 +29,8 @@
                                     </div>
                                     <i class="fad fa-2x text-info-300 fa-box-full"></i>
                                 </div>
-                            </div>
+                        </div>
+
 <!-- .st-card -->
                         </div>
 <!-- .col- -->
@@ -61,7 +65,41 @@
                     </div>
           
                     <div class="row">
-                        <div class="col-lg-5">
+                    <div class="col-lg-5">
+                            <div class="st-card">
+                            <header class="st-card__header">
+                                    <h5 class="st-card__title">@lang('admin.home.products_in')</h5>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <a href="http://127.0.0.1:8000/admin/product">
+                                            <button type="button" class="btn btn-outline-light">@lang('admin.home.view_all')</button>
+                                        </a>
+                                    </div>
+                                </header>
+                                <div class="st-card__body d-flex align-items-center">
+                                    <div class="min-width-0 mr-auto">
+                                        <h4 class="text-warning font-weight-bold">{{ number_format(count($products_feature)) }}</h4>
+                                        <div class="text-truncate text-muted">@lang('admin.home.products_feature')</div>
+                                    </div>
+                                    <i class="fad fa-2x text-warning-300 fa-box-full"></i>
+                                </div>
+                                <div class="st-card__body d-flex align-items-center">
+                                    <div class="min-width-0 mr-auto">
+                                        <h4 class="text-success font-weight-bold">{{ number_format(count($products_normal)) }}</h4>
+                                        <div class="text-truncate text-muted">@lang('admin.home.products_normal')</div>
+                                    </div>
+                                    <i class="fad fa-2x text-success-300 fa-box-full"></i>
+                                </div>
+                                <div class="st-card__body d-flex align-items-center">
+                                    <div class="min-width-0 mr-auto">
+                                        <h4 class="text-danger font-weight-bold">{{ number_format(count($products_hsd)) }}</h4>
+                                        <div class="text-truncate text-muted">@lang('admin.home.products_hsd')</div>
+                                    </div>
+                                    <i class="fad fa-2x text-danger-300 fa-box-full"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-7">
                             <div class="st-card">
                                 <header class="st-card__header">
                                     <h5 class="st-card__title">@lang('admin.home.chart_order')</h5>
@@ -71,18 +109,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-7">
-                            <div class="st-card st-card--fixed-height">
-                                <header class="st-card__header">
-                                    <h5 class="st-card__title">@lang('admin.home.chart_order_by_month')</h5>
-                                </header>
-                                <div class="st-card__body p-4">
-                                <div id="order-chart"></div>
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                                <div class="st-card st-card--fixed-height">
+                                    <header class="st-card__header">
+                                        <h5 class="st-card__title">@lang('admin.home.chart_order_by_month')</h5>
+                                    </header>
+                                    <div class="st-card__body p-4">
+                                    <div id="order-chart"></div>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
-                
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="st-card st-card--fixed-height">
@@ -181,5 +221,4 @@
                         </div>
 <!-- .col -->
                     </div>
-                
 @endsection

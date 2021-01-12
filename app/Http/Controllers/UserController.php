@@ -66,11 +66,12 @@ class UserController extends Controller
 
     public function coupon(Request $request){
         $check = CouponDetail::where('code', $request->code)->first();
+        if(!$check) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.notFoundCoupon')));
+
         $coupon = session()->has('checkCoupon') ? session()->get('checkCoupon') : array();
         $coupon[$check->id] = $check->coupon()->first();
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        
-        if(!$check) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.notFoundCoupon')));
+
         if($check->status == 'used') return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponUsed')));
         if($today > $coupon[$check->id]->end_date) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponExpired')));
 

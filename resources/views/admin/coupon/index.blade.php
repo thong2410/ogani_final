@@ -76,7 +76,7 @@
             @endforeach
             @else
             <tr>
-                <td colspan="3" class="text-center">@lang('admin.coupon.not_found')</td>
+                <td colspan="7" class="text-center">@lang('admin.coupon.not_found')</td>
             </tr>
             @endif
         </tbody>

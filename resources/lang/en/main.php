@@ -151,8 +151,7 @@ return [
         'total_price' => 'Total Price',
         'proceed_to_checkout' => 'Proceed to check out',
         'write_coupon' => 'Enter a discount code',
-        'hsd' => 'This product has expired on',
-        'proceed_to_checkout' => 'Proceed to check out'
+        'proceed_to_checkout' => 'Proceed to check out',
     ],
     'checkout' => [
         'paymethod' => [

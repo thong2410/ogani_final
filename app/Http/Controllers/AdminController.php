@@ -8,6 +8,7 @@ use DB;
 use App\Review;
 use App\Order;
 use App\Product;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -18,6 +19,9 @@ class AdminController extends Controller
         $this->data['new_orders'] = Order::orderBy('created_at', 'DESC')->limit(10)->get();
         $this->data['orders_delivered'] = Order::where('order_status', '=', 'delivered')->get();
         $this->data['products_in_stock'] = Product::where('quantity', '>', 0)->get();
+        $this->data['products_feature'] = Product::where('status', '=', 'feature')->get();
+        $this->data['products_normal'] = Product::where('status', '=', 'normal')->get();
+        $this->data['products_hsd'] = Product::where('hsd', '<=', Carbon::today())->get();
         $this->data['total_order_this_month'] = Order::select(
                                                     //DB::raw('count(*) as sums'), 
                                                     DB::raw("DATE_FORMAT(created_at,'%m') as months")

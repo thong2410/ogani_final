@@ -108,7 +108,8 @@
                             </li>
                             <li class="st-menu__item">
                                 <a href="javascript:void" class="st-menu__link st-menu__toggle">
-                                    <i class="st-menu__icon fad fa-list"></i>
+                                    <i class="st-menu__icon fad fa-percent"></i>
+                             
                                     <span class="st-menu__text">@lang('admin.coupon.coupon')</span>
                                     <i class="st-menu__caret fad fa-chevron-down"></i>
                                 </a>

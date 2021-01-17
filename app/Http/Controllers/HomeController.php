@@ -102,12 +102,15 @@ class HomeController extends Controller
         });
 
            // lọc theo giá
-        $this->data['min_price'] = Product::min('unit_price');
-        $this->data['max_price'] = Product::max('unit_price');
+        $this->data['min_price'] = 0;
+        $this->data['max_price'] = Product::max('unit_price') + 10000;
         if(isset($_GET['start_price']) && isset($_GET['end_price'])){
-            $min_price = $_GET['start_price'];
-            $max_price = $_GET['end_price'];
-            $qb->whereBetween('unit_price', [$min_price, $max_price]);
+            $start_price = $_GET['start_price'];
+            $end_price = $_GET['end_price'];
+
+            $this->data['start_price'] = $start_price;
+            $this->data['end_price'] = $end_price;
+            // $qb->whereBetween('unit_price', [$start_price, $end_price]);
         }
 
         $qb->orderBy($arrSort['sortBy'], $arrSort['direction']);

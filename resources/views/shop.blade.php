@@ -35,7 +35,6 @@
                         </div>
                     </div>
                 </div>
-                @if(!isset($cid))
                 <div class="shop-sidebar">
                     <form>
                         <p>
@@ -49,7 +48,6 @@
                         <button class="btn btn-danger btn-sm">@lang('main.shop_detail.submit')</button>
                     </form>
                 </div>
-                @endif
                 <div class="filter-sidebar--background" style="display: none"></div>
             </div>
             <div class="col-xl-9">
@@ -95,11 +93,27 @@
                         <div class="shop-products_bottom">
                             <div class="row no-gutters-sm">
                             @if(count($products) > 0)
-                                @foreach($products as $prod)
-                                <div class="col-6 col-md-4">
-                                    @include('subviews.items.block-product', $prod)
-                                </div>
-                                @endforeach
+                                @if(isset($start_price) && isset($end_price))
+                                    @php $countProd = 0; @endphp
+                                    @foreach($products as $prod)
+                                        @php $realPrice = $prod->unit_price - $prod->unit_price * ($prod->sale / 100); @endphp
+                                        @if($realPrice >= $start_price && $realPrice <= $end_price)
+                                            @php $countProd++ @endphp
+                                        <div class="col-6 col-md-4">
+                                            @include('subviews.items.block-product', $prod)
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                    @if($countProd == 0)
+                                    <div class="col-12 alert alert-danger text-center">@lang('main.no_result')</div>
+                                    @endif
+                                @else
+                                    @foreach($products as $prod)
+                                    <div class="col-6 col-md-4">
+                                        @include('subviews.items.block-product', $prod)
+                                    </div>
+                                    @endforeach
+                                @endif
                             @else
                                 <div class="col-12 alert alert-danger text-center">@lang('main.no_result')</div>
                             @endif

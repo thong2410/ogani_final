@@ -15,6 +15,10 @@ return [
         'sunday'=>'<span>Chủ nhật:</span> Nghỉ',
         'sub_text' => 'Nhân viên của chúng tôi sẽ gọi lại sau và giải đáp thắc mắc của bạn.'
     ],
+    'shop_detail' => [
+        'filter' => 'Lọc giá sản phẩm',
+        'submit' => 'Gửi',
+    ],
     'sign_in' => 'Đăng nhập',
     'sign_in_text' => 'Đăng nhập bằng tài khoản thành viên của bạn',
     'sign_up' => 'Tạo tài khoản',

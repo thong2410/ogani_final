@@ -359,6 +359,12 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/star-rating.min.js') }}"></script> 
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    @php
+        if(!isset($min_price) || !isset($max_price)){
+        $min_price = 0;
+        $max_price = 1000000;
+    }
+    @endphp
     <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/412efe8099d533a1f0694925b/015aa002c632c5d5cf042302c.js");</script>
     <script>
         $(document).ready(function () {
@@ -371,6 +377,27 @@
                     curModal.modal('show').find('.modal-content').load($(elem).attr('rel'));
                 });
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $( "#range_price" ).slider({
+              orientation: "horizital",
+              range: true,
+              min: {{$min_price}},
+              max: {{$max_price}},
+              step: 5000,
+              values: [ {{$min_price}}, {{$max_price}} ],
+              slide: function( event, ui ) {
+                $( "#range_amount" ).val( "VNĐ " + ui.values[ 0 ] + " - VNĐ " + ui.values[ 1 ] );
+                $( "#start_price" ).val(ui.values[ 0 ]);
+                $( "#end_price" ).val(ui.values[ 1 ]);
+              }
+            });
+            $( "#range_amount" ).val( "VNĐ " + $( "#range_price" ).slider( "values", 0 ) +
+              " - VNĐ " + $( "#range_price" ).slider( "values", 1 ) );
+            $( "#start_price" ).val({{$min_price}});
+            $( "#end_price" ).val({{$max_price}});
         });
     </script>
 </body>

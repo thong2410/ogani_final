@@ -101,6 +101,15 @@ class HomeController extends Controller
             ->orWhere('parent_id', '=', $cid);
         });
 
+           // lọc theo giá
+        $this->data['min_price'] = Product::min('unit_price');
+        $this->data['max_price'] = Product::max('unit_price');
+        if(isset($_GET['start_price']) && isset($_GET['end_price'])){
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+            $qb->whereBetween('unit_price', [$min_price, $max_price]);
+        }
+
         $qb->orderBy($arrSort['sortBy'], $arrSort['direction']);
         
 

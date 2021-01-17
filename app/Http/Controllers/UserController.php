@@ -67,14 +67,14 @@ class UserController extends Controller
     public function coupon(Request $request){
         $check = CouponDetail::where('code', $request->code)->first();
         if(!$check) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.notFoundCoupon')));
+        if($check->status == 'used') return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponUsed')));
+
+        $couponEvent = $check->coupon()->first();
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        if($today > $couponEvent->end_date) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponExpired')));
 
         $coupon = session()->has('checkCoupon') ? session()->get('checkCoupon') : array();
-        $coupon[$check->id] = $check->coupon()->first();
-        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-
-        if($check->status == 'used') return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponUsed')));
-        if($today > $coupon[$check->id]->end_date) return response()->json(array('status' => 'warning', 'msg' => trans('main.coupon.couponExpired')));
-
+        $coupon[$check->id] = $couponEvent;
         session()->put('checkCoupon', $coupon);
         return response()->json(array('status' => 'success', 'msg' => trans('main.coupon.checkSuccess')));
     }
@@ -147,15 +147,17 @@ class UserController extends Controller
             $note = !empty($request->note) ? $request->note : '---';
 
             $total_price = session()->get('total_price');
-            $getCouponList = session()->get('checkCoupon');
+            $getCouponList = session()->has('checkCoupon') ? session()->get('checkCoupon') : array();
             $couponList = "";
-            foreach ($getCouponList as $key => $value) {
-                CouponDetail::where('id', $key)->update([
-                    'status' => 'used',
-                    'username' => Auth::user()->username,
-                ]);
+            if(count($getCouponList) > 0){
+                foreach ($getCouponList as $key => $value) {
+                    CouponDetail::where('id', $key)->update([
+                        'status' => 'used',
+                        'username' => Auth::user()->username,
+                    ]);
 
-                $couponList .= $value->coupon_value.",";
+                    $couponList .= $value->coupon_value.",";
+                }
             }
  
             Order::create([
@@ -211,7 +213,7 @@ class UserController extends Controller
                 ]);
               
             }
-            
+            if(session()->has('checkCoupon'))
             session()->forget('checkCoupon');
             
             return response()->json(['success'=> trans('main.checkout.place_order_success'), 'url' => route('user.cart.order-completed')]);

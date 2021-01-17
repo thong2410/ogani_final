@@ -1,6 +1,9 @@
 @extends('layouts.app') 
 @section('title', $title) 
 @section('content')
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <div class="ogami-breadcrumb">
     <div class="container">
         <ul>
@@ -32,6 +35,21 @@
                         </div>
                     </div>
                 </div>
+                @if(!isset($cid))
+                <div class="shop-sidebar">
+                    <form>
+                        <p>
+                          <label for="range_amount"><h4>@lang('main.shop_detail.filter')</h4></label><br><br>
+                          <input type="text" id="range_amount" readonly style="border:0; color:#f6931f; font-weight:bold;margin-bottom: 20px">
+                          <input type="hidden" name='start_price' id='start_price'>
+                          <input type="hidden" name="end_price" id="end_price">
+                        </p>
+                         
+                        <div id="range_price"></div><br><br>
+                        <button class="btn btn-danger btn-sm">@lang('main.shop_detail.submit')</button>
+                    </form>
+                </div>
+                @endif
                 <div class="filter-sidebar--background" style="display: none"></div>
             </div>
             <div class="col-xl-9">

@@ -16,6 +16,10 @@ return [
         'sunday'=>'<span>Sunday:</span> Close',
         'sub_text' => 'Our staff will call back later and answer your questions.'
     ],
+    'shop_detail' => [
+        'filter' => 'Filter price',
+        'submit' => 'Submit',
+    ],
     'sign_in' => 'Sign In',
     'sign_in_text' => 'Login to the site with a member account',
     'sign_up' => 'Sign Up',
